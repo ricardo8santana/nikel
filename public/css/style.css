@@ -2,12 +2,23 @@
   background:linear-gradient(120deg, #4c79d3 44.9%, #ffffff 45%) no-repeat fixed;
 }
 #app{
-  background:linear-gradient(120deg, #ffffff 45%.9 #4c79d3 45% ) no-repeat fixed;  
+  background:linear-gradient(120deg, #ffffff 44%.9, #4c79d3 45% ) no-repeat fixed;  
 }
 header{
   border-bottom: 1px solid #bebcbc;
   padding: 5px;
   background-color: #ffffff;
+}
+.icon-detail{
+  font-size: 50px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.color-primary{
+  color: #4c0070;
+}
+.color-secondary{
+  color: #4c79d3;
 }
 .text-login{
   color: #ffffff;
