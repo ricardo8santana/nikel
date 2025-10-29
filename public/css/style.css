@@ -81,3 +81,9 @@ header{
   padding: 20px 0px 0px 0px;
 
 }
+.logout{
+  min-width: 5rem !important;
+}
+.menu{
+  margin-right:20px
+}
