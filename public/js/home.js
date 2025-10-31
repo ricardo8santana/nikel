@@ -7,7 +7,7 @@ let data = {
 
 document.getElementById("button-logout").addEventListener("click", logout);
 document.getElementById("transactions-button").addEventListener("click", function(){
-  window.location.href = "transactions.html";
+  window.location.href = "transactions.html"
 });
 //Adicionar lançamento
 document.getElementById("transactions-form").addEventListener("submit", function(e) {
@@ -55,8 +55,8 @@ function checkLogged(){
 
       getCashIn();
       getCashOut();
-      getCashOut();
-  
+      getCashTotal();
+ } 
 function logout(){
     sessionStorage.removeItem("logged");
     localStorage.removeItem("session");
@@ -103,7 +103,6 @@ function getCashIn(){
     }
     documet.getElementById("cash-in-list").innerHTML = cashInHtml;
   }
-}
 
 function getCashOut(){
     const transactions = data.transactions;
@@ -146,6 +145,7 @@ function getCashOut(){
   }
 
 
+
 function getTotal(){
     const transactions = data.transactions;
     let total = 0;
@@ -156,6 +156,7 @@ function getTotal(){
           total -= item.value;
         }
     });
+
     document.getElementById("total").innerHTML = `R$ ${total.toFixed(2)}`;
 }
 
