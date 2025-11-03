@@ -23,6 +23,8 @@ document.getElementById("transactions-form").addEventListener("submit", function
     e.target.reset();
     myModal.hide();
 
+    getTransactions();
+
     alert("Lançamento adicionado com sucesso.")
 
 });
@@ -45,10 +47,39 @@ function checkLogged(){
             data = JSON.parse(dataUser);
         }
 
+    getTransactions();
+
  } 
  function logout(){
     sessionStorage.removeItem("logged");
     localStorage.removeItem("session");
 
     window.location.href = "index.html";
+}
+function getTransactions(){
+    const transactions = data.transactions;   
+    let transactionsHtml = ``;
+
+    if(transactions.length){
+        transactions.forEach((item)=>{
+            let type = "Entrada";
+
+            if(item.type === "2"){
+                    type = "Saída"
+            }
+            transactions += `
+            <tr>
+                          <th scope="row"${item.date}>22/10/2025</th>
+                          <td>${item.value.toFixed(2)}</td>
+                          <td>${type}</td>
+                          <td>${item.description}</td>
+                        </tr>
+            `
+        })
+
+    }
+    document.getElementById("transactions-list").innerHTML = transactionsHtml;
+}
+function saveData(data){
+    localStorage.getItem(data.login, JSON.stringify(data));
 }
