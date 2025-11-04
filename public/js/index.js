@@ -4,7 +4,7 @@ document.getElementById("create-form").addEventListener("submit", function(e) {
     e.preventDefault(); 
     alert("Conta criada com sucesso!");
   });
-const myModal = new bootstrap.Modal("register-modal");
+const myModal = new bootstrap.Modal("#register-modal");
 let logged = sessionStorage.getItem("logged");
 const session = localStorage.getItem("session");
 
@@ -22,7 +22,7 @@ document.getElementById("login-form").addEventListener("submit", function(e){
 
    if(!account){
     alert("Ops! verifique o usuário ou a senha.")
-    return
+    return;
    }
 
    if(account){
@@ -52,11 +52,20 @@ document.getElementById("create-form").addEventListener("submit", function(e){
         alert("Preencha a senha com no mínimo 4 digitos.");
         return;
    }
+   const usuarioExistente = localStorage.getItem(email);
+
+      if (usuarioExistente) {
+         alert("E-mail já cadastrado")
+         return;
+      }
+
    saveAccount({
     login: email,
     password: password,
-    trasactions: []
+    transactions: []
    });
+
+   e.target.reset();
 
    myModal.hide();
    alert("Conta criada com sucesso!");
@@ -64,7 +73,7 @@ document.getElementById("create-form").addEventListener("submit", function(e){
 
 function checklLogged(){
     if(session){
-        sessionStorage.getItem("logged", session);
+        sessionStorage.setItem("logged", session);
         logged = session;
     }
 
@@ -81,16 +90,16 @@ function saveAccount(data){
 
 function saveSession(data, saveSession){
     if(saveSession){
-        localStorage.getItem("session", data);
+        localStorage.setItem("session", data);
     }
     sessionStorage.setItem("logged", data);
 }
 
 function getAccount(key){
-    const account = localStorage.getItem(key, )
+    const account = localStorage.getItem(key);
 
     if(account){
-        return JSON.parse();
+        return JSON.parse(account);
         
     }
     return "";

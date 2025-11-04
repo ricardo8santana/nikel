@@ -11,10 +11,10 @@ document.getElementById("transactions-button").addEventListener("click", functio
 });
 //Adicionar lançamento
 document.getElementById("transactions-form").addEventListener("submit", function(e) {
-    e.presentDefault();
+   e.preventDefault();
 
     const value = parseFloat(document.getElementById("value-input").value);
-    const description = document.getElementById("description-input").va;lue
+    const description = document.getElementById("description-input").value;
     const date = document.getElementById("date-input").value;
     const type = document.querySelector('input[name="type-input"]:checked').value;
 
@@ -39,7 +39,7 @@ checkLogged();
 
 function checkLogged(){
     if(session){
-        sessionStorage.getItem("logged", session);
+        sessionStorage.setItem("logged", session);
         logged = session;
     }
 
@@ -72,6 +72,10 @@ function getCashIn(){
     if(cashIn.length){
         let cashInHtml = ``;
         let limit = 0; 
+
+    //      let cashInHtml = '';  // Inicializando a variável fora do loop
+
+    // let limit = cashIn.length > 5 ? 5 : cashIn.length;
 
     }
     if(cashIn.length > 5){
@@ -110,28 +114,31 @@ function getCashOut(){
     const cashIn = transactions.filter((item) => item.type === "2");
 
     if(cashIn.length){
-        let cashInHtml = ``;
+        let cashOutHtml = ``;
         let limit = 0; 
+    //       let cashOutHtml = '';  // Inicializando a variável fora do loop
+
+    // let limit = cashOut.length > 5 ? 5 : cashOut.length;
 
     }
-    if(cashIn.length > 5){
+    if(cashOut.length > 5){
         limit = 5;
     }else{
-        limit = cashIn.length;
+        limit = cashOut.length;
     }
 
     for (let index = 0; index < limit; index++) {
-       cashInHtml +=`
+       cashOutHtml +=`
     <div class="row mb-4">
           <div class="col-12">
-              <h3 class="fs-2">R$1 ${cashIn[index].value.toFixed(2)}</h3>
+              <h3 class="fs-2">R$1 ${cashOut[index].value.toFixed(2)}</h3>
               <div class="container p-0">
                   <div class="row">
                     <div class="col-12 col-md-8">
-                      <p>${cashIn[index].description}</p>
+                      <p>${cashOut[index].description}</p>
                     </div>
                     <div class="col-12 col-md-3 d-flex justify-content-end">
-                    ${cashIn[index].date}
+                    ${cashOut[index].date}
                     </div>
                   </div>
               </div>
@@ -141,7 +148,7 @@ function getCashOut(){
         `
 
     }
-    documet.getElementById("cash-out-list").innerHTML = cashInHtml;
+    documet.getElementById("cash-out-list").innerHTML = cashOutHtml;
   }
 
 
@@ -151,7 +158,7 @@ function getTotal(){
     let total = 0;
     transactions.forEach((item)=> {
         if(item.type === "1"){
-          total =+ item.value;
+          total += item.value;
         }else{
           total -= item.value;
         }
@@ -161,7 +168,7 @@ function getTotal(){
 }
 
 function saveData(data){
-    localStorage.getItem(data.login, JSON.stringify(data));
+    localStorage.setItem(data.login, JSON.stringify(data));
 }
 
 
